@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+    {% block head %}
+        <meta charset="utf-8">
+        <title>Moduł 8</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% endblock %}
+    </head>
+    <body>
+
+        <h1>Witaj na mojej stronie domowej!</h1>
+        <img src="https://uploads.kodilla.com/bootcamp/py/08/code.jpg" alt="Laptop screen with code" title="Code">
+        <div id="content">{% block content %}{% endblock %}</div>
+        
+    </body>
+</html>
