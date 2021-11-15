@@ -3,14 +3,45 @@
     <head>
     {% block head %}
         <meta charset="utf-8">
-        <title>Moduł 8</title>
+        <title>Moduł 9 kalkulator</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     {% endblock %}
     </head>
     <body>
 
-        <h1>Witaj na mojej stronie domowej!</h1>
-        <img src="https://uploads.kodilla.com/bootcamp/py/08/code.jpg" alt="Laptop screen with code" title="Code">
+        <h1>KALKULATOR WALUT</h1>
+
+        <form action="" method="POST" id="massage">
+
+           <label for="currency">Wybierz walutę:</label>
+           <select name="currency" id="currency">
+               <option value="USD">USD</option>
+               <option value="AUD">AUD</option>
+               <option value="CAD">CAD</option>
+               <option value="EUR">EUR</option>
+               <option value="HUF">HUF</option>
+               <option value="CHF">CHF</option>
+               <option value="GBP">GBP</option>
+               <option value="JPY">JPY</option>
+               <option value="CZK">CZK</option>
+               <option value="DKK">DKK</option>
+               <option value="NOK">NOK</option>
+               <option value="SEK">SEK</option>
+               <option value="XDR">XDR</option>
+           </select>
+           <br>
+           <br>
+
+           <label for="currency_no">Ile waluty chcesz kupić? (1 - 1000)</label>
+           <input type="number" id="currency_no" name="currency_no" min=1 max=1000><br>  
+           <br>
+
+           <input type="submit" value="Przelicz"><br>
+           <br>
+           <label>Do zapłaty (PLN):</label>
+           <br>
+
+        </form>
         <div id="content">{% block content %}{% endblock %}</div>
         
     </body>

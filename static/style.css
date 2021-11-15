@@ -3,12 +3,14 @@ div#errors li {color: red;}
 h1 {
     color: black;
     background-color: dimgray;
+    width: 880px;
     font-size: 40px;
 }
 
 h2 {
-    font-size: 30px;
-    color: blue;
+    font-size: 20px;
+    color: black;
+    background-color: dimgray;
 }
 
 h3 {
@@ -24,4 +26,16 @@ textarea {
     border-radius: 5px;
     border: 1px solid #ccc;
     box-shadow: 1px 1px 1px #999;
+}
+
+body { background-image: url('tlo.jpg');
+    width: 900px;
+    height: 500px;
+    background-repeat: no-repeat;
+
+}
+
+label {    color: black;
+    background-color: dimgray;
+
 }
