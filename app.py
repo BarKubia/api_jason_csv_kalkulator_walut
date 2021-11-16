@@ -30,10 +30,23 @@ for i in data_rates:
 
 @app.route('/base', methods=['GET', 'POST'])
 def base():
+
    if request.method == 'GET':
        print("We received GET")
        return render_template("/base.html")
    elif request.method == 'POST':
        print("We received POST")
        print(request.form)
-       return redirect("/")
+       print(request.form["currency"])
+       for n in data_rates:
+           if n["code"]==request.form["currency"]:
+               zmienna=n["bid"]
+               print(f"zgadza się, kurs= {zmienna}")
+               print(request.form["currency_no"])
+               print(n)
+               zmienna_2=float(request.form["currency_no"])
+
+               pln=round(zmienna*zmienna_2, 2)
+               print(pln)
+
+       return render_template("/base.html", items=pln, zmienna=request.form["currency"], zmienna_2=request.form["currency_no"])
