@@ -2,11 +2,9 @@
 <html lang="pl">
 
 <head>
-    {% block head %}
     <meta charset="utf-8">
     <title>Moduł 9 kalkulator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    {% endblock %}
 </head>
 
 <body>
@@ -41,18 +39,16 @@
         <input type="submit" value="Przelicz"><br>
 
        
-    {% if items %}
+    {% if pln %}
     <br>
-    <label>Wybrano: {{zmienna_2}} {{zmienna}} 
+    <label>Wybrano: {{currency_no_chosen}} {{currency_chosen}} 
     <br>
-    Do zapłaty: {{items}} (PLN)</label>
+    Do zapłaty: {{pln}} (PLN)</label>
     {% endif %}
 
    
 
     </form>
-    <div id="content">{% block content %}{% endblock %}</div>
-
 </body>
 
 </html>

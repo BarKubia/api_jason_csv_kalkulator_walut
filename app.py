@@ -40,13 +40,13 @@ def base():
        print(request.form["currency"])
        for n in data_rates:
            if n["code"]==request.form["currency"]:
-               zmienna=n["bid"]
-               print(f"zgadza się, kurs= {zmienna}")
+               currency_chosen=n["bid"]
+               print(f"zgadza się, kurs= {currency_chosen}")
                print(request.form["currency_no"])
                print(n)
-               zmienna_2=float(request.form["currency_no"])
+               currency_no_chosen=float(request.form["currency_no"])
 
-               pln=round(zmienna*zmienna_2, 2)
+               pln=round(currency_chosen*currency_no_chosen, 2)
                print(pln)
 
-       return render_template("/base.html", items=pln, zmienna=request.form["currency"], zmienna_2=request.form["currency_no"])
+       return render_template("/base.html", pln=pln, currency_chosen=request.form["currency"], currency_no_chosen=request.form["currency_no"])
