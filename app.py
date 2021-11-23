@@ -1,52 +1,26 @@
-from flask import Flask
+from collections import namedtuple
+from flask import Flask, request, render_template
+from forms import EmailPasswordForm
+
 app = Flask(__name__)
-from flask import request, redirect
-from flask import render_template
-import requests
-import csv
+app.config["SECRET_KEY"] = "nininini"
 
-response = requests.get("http://api.nbp.pl/api/exchangerates/tables/C?format=json")
-data = response.json()
-data=data[0]
-data_rates=data["rates"]
+User = namedtuple("User", field_names=["email", "password"])
+user = User(email="john@black.com", password="black")
 
+@app.route("/login/", methods=["GET", "POST"])
+def login():
+    form = EmailPasswordForm()
+    error = ""
+    if request.method == "POST":
+        if form.validate_on_submit():
+            if form.email.data == user.email and form.password.data == user.password:
+                return "You are logged id"
+            else:
+                return "Wrong credentials!!"
+        else:
+            error = form.errors
+    return render_template("login.html", form=form, error=error)
 
-header = ['currency', 'code', 'bid', 'ask']
-
-writer = csv.writer(open('/home/bartosz/Pulpit/Kodilla/Python/mod9_kalkulator/plik.csv', "w"), delimiter=';', dialect=csv.excel)
-writer.writerow(header)
-
-for i in data_rates:
-    tab=[]
-    tab.append(i["currency"])
-    tab.append(i["code"])
-    tab.append(i["bid"])
-    tab.append(i["ask"])
-    print(tab)
-    writer.writerow(tab)
-    
-    print("----------------------")
-
-
-@app.route('/base', methods=['GET', 'POST'])
-def base():
-
-   if request.method == 'GET':
-       print("We received GET")
-       return render_template("/base.html")
-   elif request.method == 'POST':
-       print("We received POST")
-       print(request.form)
-       print(request.form["currency"])
-       for n in data_rates:
-           if n["code"]==request.form["currency"]:
-               currency_chosen=n["bid"]
-               print(f"zgadza się, kurs= {currency_chosen}")
-               print(request.form["currency_no"])
-               print(n)
-               currency_no_chosen=float(request.form["currency_no"])
-
-               pln=round(currency_chosen*currency_no_chosen, 2)
-               print(pln)
-
-       return render_template("/base.html", pln=pln, currency_chosen=request.form["currency"], currency_no_chosen=request.form["currency_no"])
+if __name__ == "__main__":
+    app.run(debug=False)
